@@ -1,0 +1,11 @@
+language: java
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: "$ACCESS_KEY_ID"
+  secret_access_key:
+    secure: "$SECRET_ACCESS_KEY"
+  region: us-west-2
+  app: b2bf
+  env: B2bf-env
+  bucket_name: elasticbeanstalk-us-west-2-714284225537
