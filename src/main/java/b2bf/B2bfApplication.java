@@ -1,4 +1,4 @@
-package com.b2bf.b2bf;
+package b2bf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.b2bf.b2bf;
+package b2bf;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
