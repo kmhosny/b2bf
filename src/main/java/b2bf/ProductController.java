@@ -31,12 +31,12 @@ public class ProductController {
   ProductController(ProductRepository repository) {
     this.repository = repository;
   }
-  @GetMapping("/")
+  @GetMapping()
   List<Product> all() {
     return repository.findAll();
   }
 
-  @PostMapping("/")
+  @PostMapping()
   Product newProduct(@RequestBody Product newProduct) {
 	if(newProduct.getImageUrl()!= null) {
 		String img = newProduct.getImageUrl();

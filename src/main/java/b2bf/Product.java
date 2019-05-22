@@ -35,13 +35,16 @@ public class Product {
 	@Getter @Setter private Set<Flag> flags;
 	
 	@Getter @Setter private Long impressions;
-
+	
+	Product() {}
+		
 	Product(String vendorUID, String title, String description, String imageUrl, float price, Flag f) {
 		this.vendorUID = vendorUID;
 		this.title = title;
 		this.description = description;
 		this.imageUrl = imageUrl;
 		this.price = price;
+		this.impressions = 0l;
 		this.flags = new HashSet<Flag>();
 		this.flags.add(f);
 	}
