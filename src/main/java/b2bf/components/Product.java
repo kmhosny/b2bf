@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Product {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(length = 16)
 	@Getter @Setter private UUID id;
 	
 	@Column(nullable = false)

@@ -39,17 +39,44 @@ public class ProductController {
     return repository.findAll();
   }
 
-  @Transactional
   @PostMapping()
   Product newProduct(@RequestBody Product newProduct) {
-	if(newProduct.getImageUrl()!= null) {
-		String img = newProduct.getImageUrl();
-		String imgUrl=S3Client.uploadDataURIImage(configuration.getProperty("aws.bucketName"),
-				"products/"+UUID.randomUUID(), img);
-		System.out.println(imgUrl);
-		newProduct.setImageUrl(imgUrl);
-  	}
- 
+	newProduct.setImageUrl(uploadToS3(newProduct.getImageUrl()));
     return repository.save(newProduct);
+  }
+  
+  @GetMapping("/{id}")
+  Product getProduct(@PathVariable String id) {
+	UUID uid = UUID.fromString(id);
+    return repository.findById(uid).orElseThrow(() -> new ProductNotFoundException(uid));
+  }
+  
+  @DeleteMapping("/{id}")
+  void deleteProduct(@PathVariable String id) {
+	UUID uid = UUID.fromString(id);
+    repository.deleteById(uid);
+  }
+  
+  @PutMapping("/{id}")
+  Product replaceEmployee(@RequestBody Product editProduct, @PathVariable String id) {
+	UUID uid = UUID.fromString(id);
+	
+    return repository.findById(uid)
+      .map(product -> {
+    	  product.setTitle(editProduct.getTitle());
+    	  product.setDescription(editProduct.getDescription());
+    	  product.setPrice(editProduct.getPrice());  
+    	  product.setImageUrl(uploadToS3(editProduct.getImageUrl()));
+    	  return repository.save(product);
+      }).orElseThrow(() -> new ProductNotFoundException(uid));
+  }
+  
+  String uploadToS3(String imageData) {
+	if(imageData==null)
+		return null;
+	String img = imageData;
+	String imgUrl=S3Client.uploadDataURIImage(configuration.getProperty("aws.bucketName"),
+		"products/"+UUID.randomUUID(), img);
+	return imgUrl;
   }
 }
