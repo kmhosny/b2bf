@@ -1,3 +1,4 @@
+sudo: true
 language: java
 jdk:
   - oraclejdk11
@@ -5,6 +6,7 @@ services:
   - mysql
 before_script:
   - mysql -e 'create database bbf;'
+  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.7.0.deb && sudo dpkg -i --force-confnew elasticsearch-6.7.0.deb && sudo service elasticsearch start
 deploy:
   provider: elasticbeanstalk
   access_key_id:
