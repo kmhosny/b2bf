@@ -18,11 +18,15 @@ Maven will automatically install all the depencies through pom file.
 - `./mvnw clean spring-boot:run`
 the app will seed the database on startup with 2 products and index their data into elastic search.
 
- #####Design
+ ##### Design
 The app has 2 tables, product and flag
  - it was required that the product to have a generated unique ID. java's UUID Class was used as the primary key for this table and JPA already provides a generator for this type of primary key.
  - according to the requirement, product had flags that could vary over time, could increase or decrease, for that i took the decision of creating a flag table that will hold the flags created in the system, whenever a product needs to be flagged by a flag it will be done through table product_flags which is a joint table between product and flag tables since it's a many-to-many relationship betweent the two tables.
  - when creating a new product, the user can pass the image as dataURI (data content type concatenated with base64 encoding of the image). in the API the image will be converted to a stream of bytes then passed to AWS SDK to uploaded as an object on S3 bucket with a randomly generated UUID as the name then the URL is saved in the product field imageUrl.
+ 
+ ##### Deployment
+ - The app is automatically deployed using travis, it uses travis Elastic Beanstalk plugin, it packages the app then pushes it to the S3 bucket of the EBS which continues the deployment from there.
+ - The environment is managed by AWS Elastic beanstalk, it provides EC2, load balancing, VPC and RDS for the software to be deployed.
 
 ##### Using the app
 - `./mvnw clean spring-boot:run`
