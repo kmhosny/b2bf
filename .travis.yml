@@ -3,6 +3,8 @@ jdk:
   - oraclejdk11
 services:
   - mysql
+before_script:
+  - mysql -e 'create database bbf;'
 deploy:
   provider: elasticbeanstalk
   access_key_id:
