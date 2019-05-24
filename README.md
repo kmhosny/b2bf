@@ -40,4 +40,4 @@ The app has 2 tables, product and flag
 - test coverage 
 - exception handling to prevent 500 returns
 - representation layer for the returned objects to prevent exposing all fields 
-- full HATEOAS REST complayens
+- full HATEOAS REST compliance. 
