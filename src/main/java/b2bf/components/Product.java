@@ -14,7 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 @Entity
+@Document(indexName = "product", type="product")
 public class Product {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(length = 16)
 	@Getter @Setter private UUID id;
@@ -48,5 +51,5 @@ public class Product {
 		this.flags = new HashSet<Flag>();
 		this.flags.add(f);
 	}
-
+	
 }
