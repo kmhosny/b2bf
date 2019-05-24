@@ -1,6 +1,10 @@
 language: java
 jdk:
   - oraclejdk11
+services:
+  - mysql
+before_script:
+  - setup
 deploy:
   provider: elasticbeanstalk
   access_key_id:
