@@ -36,3 +36,8 @@ The app has 2 tables, product and flag
 - to modify a product `curl -X PUT http://localhost:8080/products/1-1-1-1-1 -H 'Content-type:application/json' -d '{"price":5}'`
 - to create a product `curl -X POST http://localhost:8080/products -H 'Content-type:application/json' -d '{"vendorUID":"vnd123","title":"nachos","description":"vegan burger nachos","price":1.5, imageUrl: IMAGE_AS_DATAURI}'`
 
+##### Missing Point
+- test coverage 
+- exception handling to prevent 500 returns
+- representation layer for the returned objects to prevent exposing all fields 
+- full HATEOAS REST complayens
